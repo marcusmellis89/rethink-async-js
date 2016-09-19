@@ -1,0 +1,19 @@
+{
+  "name": "rethink-async-js",
+  "version": "1.0.0",
+  "description": "repository of examples illustrating different approaches to handling the asynchronous nature of javascript",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/marcusmellis89/rethink-async-js.git"
+  },
+  "author": "Marcus Milton-Ellis",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/marcusmellis89/rethink-async-js/issues"
+  },
+  "homepage": "https://github.com/marcusmellis89/rethink-async-js#readme"
+}
