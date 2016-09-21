@@ -34,3 +34,21 @@ function getFile(file) {
 // is done.
 
 // ???
+
+let urls = ['file1','file2','file3'];
+
+urls
+.map((url) => {
+	return getFile(url);
+})
+.reduce((acc, curr, i, arr) => {
+
+		acc.then(output).then(() => {
+			return curr;
+		}).then(output);
+
+}, new Promise(() => {
+	resolve();
+});
+
+[r1, r2, r3]
