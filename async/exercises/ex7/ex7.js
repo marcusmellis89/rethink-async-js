@@ -32,4 +32,16 @@ function getFile(file) {
 // but only once previous rendering
 // is done.
 
+
+ASQ().runner(function*{
+	var text1 = getFile('file1');
+	output(text1);
+
+	var text2 = getFile('file2');
+	output(text2);
+
+	var text3 = getFile('file3');
+	output(text1);
+})
+
 // ???
