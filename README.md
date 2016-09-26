@@ -1,4 +1,4 @@
-# rethink-async-js
+# Rethink-Async-JS
 A repository of concepts, examples, and exercises on the different approaches to handling the asynchronous nature of javascript
 featuring:
 
