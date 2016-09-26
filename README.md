@@ -2,11 +2,13 @@
 A repository of concepts, examples, and exercises on the different approaches to handling the asynchronous nature of javascript
 featuring:
 
-  *callbacks
+-callbacks
 
 -thunks
 
 -promises
+
+-asynchrounous sequences
 
 -generators
 
