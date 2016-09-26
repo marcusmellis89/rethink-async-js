@@ -1,6 +1,6 @@
 # rethink-async-js
 A repository of concepts, examples, and exercises on the different approaches to handling the asynchronous nature of javascript
-includes:
+featuring:
 
 -callbacks
 -thunks
