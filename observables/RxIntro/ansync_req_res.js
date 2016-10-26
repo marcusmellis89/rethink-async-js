@@ -1,10 +1,10 @@
 let refreshButton = document.querySelector(".refresh");
 
-let refreshStream = Rx.Observable.fromEvent(refreshButton, 'click');
+let refreshClickStream = Rx.Observable.fromEvent(refreshButton, 'click');
 
 let startUpRequestStream = Rx.Observable.just("http://api.github.com/users");
 
-let requestOnRefreshStream = refreshStream
+let requestOnRefreshStream = refreshClickStream
   .map(evt => {
   const randomOffset = Math.floor(Math.random()*500);
   return "http://api.github.com/users?offset=" + randomOffset;
@@ -26,9 +26,13 @@ responseStream.subscribe( (response) => {
 
 //creates a mapped response stream that emits one random user
 let createSuggestionStream = (stream) => {
-   return stream.map(userList =>
+   return stream
+   .map(userList =>
     userList[Math.floor(Math.random()*userList.length)]
-  );
+  )
+  .startWith(null)
+  .merge(refreshClickStream.map(evt => null));
+  ;
 };
 
 let suggestion1Stream = createSuggestionStream(responseStream);
@@ -37,14 +41,19 @@ let suggestion3Stream = createSuggestionStream(responseStream);
 
 //render 'emitted' user to the DOM
 const renderSuggestion = (userdata, selector) => {
-  const element = document.getElementById(selector);
-  const usernameEl = element.querySelector('.username');
+  if (userdata === null) {
+    selector.style.visibility = 'hidden';
+  } else {
+    selector.style.visibility = 'visible';
+    const element = document.getElementById(selector);
+    const usernameEl = element.querySelector('.username');
 
-  usernameEl.href = userdata.html_url;
-  usernameEl.textContent = userdata.login;
+    usernameEl.href = userdata.html_url;
+    usernameEl.textContent = userdata.login;
 
-  const imageEl = element.querySelector('img');
-  imageEl.src = userdata.avatar_url;
+    const imageEl = element.querySelector('img');
+    imageEl.src = userdata.avatar_url;
+  }
 
 }
 
