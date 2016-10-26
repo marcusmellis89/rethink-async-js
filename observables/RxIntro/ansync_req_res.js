@@ -1,10 +1,23 @@
-let requestStream = Rx.Observable.just("http://www.api.github.com/users");
+let refreshButton = document.querySelector(".refresh");
+
+let refreshStream = Rx.Observable.fromEvent(refreshButton, 'click');
+
+let startUpRequestStream = Rx.Observable.just("http://api.github.com/users");
+
+let requestOnRefreshStream = refreshStream
+  .map(evt => {
+  const randomOffset = Math.floor(Math.random()*500);
+  return "http://api.github.com/users?offset=" + randomOffset;
+})
 
 
 //creates a metastream
-let responseStream = requestStream
+let responseStream =
+  requestOnRefreshStream
+  //merging with stream that does initial request
+  .merge(startUpRequestStream)
   //using flatMap inorder to flatten metastream
-  .flatMap((requestURL) => Rx.Observable.fromPromis(fetch(requestURL)););
+  .flatMap((requestURL) => Rx.Observable.fromPromise(fetch(requestURL)););
 
 responseStream.subscribe( (response) => {
   console.log(response);
